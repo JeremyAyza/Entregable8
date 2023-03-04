@@ -1,0 +1,59 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/cart.css">
+<link rel="stylesheet" href="/css/table.css">
+	</head>
+
+	<body>
+		<%- include('../includes/navigation.ejs') %>
+			<main>
+				<% if (orders.length> 0) { %>
+					<h1>Your Orders</h1>
+					<% orders.forEach(order=> { %>
+						<h2>Order <%= order.id %>
+						</h2>
+						<% if (order.orderItems.length> 0) { %>
+							<table>
+								<thead>
+									<tr>
+										<th>Product Name</th>
+										<th>Price</th>
+										<th>Quantity</th>
+										<th>Subtotal</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% order.orderItems.forEach(item=> { %>
+										<tr>
+											<td>
+												<%= item.product.title %>
+											</td>
+											<td>
+												<%= item.price %>
+											</td>
+											<td>
+												<%= item.qty %>
+											</td>
+											<td>
+												<%= item.subtotal %>
+											</td>
+										</tr>
+										<% }) %>
+											<tr>
+												<th></th>
+												<th></th>
+												<th>Total</th>
+												<th>
+													<%= order.total %>
+												</th>
+											</tr>
+								</tbody>
+							</table>
+							<% } else { %>
+								<h3>No items in order</h3>
+								<% } %>
+									<% }) %>
+										<% } else { %>
+											<h1>No Orders</h1>
+											<% } %>
+			</main>
+			<%- include('../includes/end.ejs') %>
